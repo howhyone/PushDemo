@@ -7,9 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C90A1F1122844FC000941E01 /* jjy2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C90A1F1022844FC000941E01 /* jjy2.jpg */; };
+		C90A1F1222844FC000941E01 /* jjy2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C90A1F1022844FC000941E01 /* jjy2.jpg */; };
+		C90A1F1322844FC000941E01 /* jjy2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C90A1F1022844FC000941E01 /* jjy2.jpg */; };
+		C91797342278014700A042EE /* LocalNotificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C91797332278014700A042EE /* LocalNotificationViewController.m */; };
+		C91797352278014700A042EE /* LocalNotificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C91797332278014700A042EE /* LocalNotificationViewController.m */; };
+		C91797362278014700A042EE /* LocalNotificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C91797332278014700A042EE /* LocalNotificationViewController.m */; };
+		C917973A227847BD00A042EE /* sound01.wav in Resources */ = {isa = PBXBuildFile; fileRef = C9179738227847BD00A042EE /* sound01.wav */; };
+		C917973B227847BD00A042EE /* sound01.wav in Resources */ = {isa = PBXBuildFile; fileRef = C9179738227847BD00A042EE /* sound01.wav */; };
+		C917973C227847BD00A042EE /* sound01.wav in Resources */ = {isa = PBXBuildFile; fileRef = C9179738227847BD00A042EE /* sound01.wav */; };
+		C917973D227847BD00A042EE /* sound02.wav in Resources */ = {isa = PBXBuildFile; fileRef = C9179739227847BD00A042EE /* sound02.wav */; };
+		C917973E227847BD00A042EE /* sound02.wav in Resources */ = {isa = PBXBuildFile; fileRef = C9179739227847BD00A042EE /* sound02.wav */; };
+		C917973F227847BD00A042EE /* sound02.wav in Resources */ = {isa = PBXBuildFile; fileRef = C9179739227847BD00A042EE /* sound02.wav */; };
 		C9DEEF342276AE7E00862CDB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C9DEEF332276AE7E00862CDB /* AppDelegate.m */; };
 		C9DEEF372276AE7E00862CDB /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9DEEF362276AE7E00862CDB /* ViewController.m */; };
-		C9DEEF3A2276AE7E00862CDB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C9DEEF382276AE7E00862CDB /* Main.storyboard */; };
 		C9DEEF3D2276AE7E00862CDB /* PushDemo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C9DEEF3B2276AE7E00862CDB /* PushDemo.xcdatamodeld */; };
 		C9DEEF3F2276AE8000862CDB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C9DEEF3E2276AE8000862CDB /* Assets.xcassets */; };
 		C9DEEF422276AE8000862CDB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C9DEEF402276AE8000862CDB /* LaunchScreen.storyboard */; };
@@ -36,12 +47,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C90A1F1022844FC000941E01 /* jjy2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = jjy2.jpg; sourceTree = "<group>"; };
+		C91797322278014700A042EE /* LocalNotificationViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LocalNotificationViewController.h; sourceTree = "<group>"; };
+		C91797332278014700A042EE /* LocalNotificationViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LocalNotificationViewController.m; sourceTree = "<group>"; };
+		C91797372278262B00A042EE /* PushDemo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PushDemo.entitlements; sourceTree = "<group>"; };
+		C9179738227847BD00A042EE /* sound01.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = sound01.wav; sourceTree = "<group>"; };
+		C9179739227847BD00A042EE /* sound02.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = sound02.wav; sourceTree = "<group>"; };
 		C9DEEF2F2276AE7E00862CDB /* PushDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PushDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C9DEEF322276AE7E00862CDB /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		C9DEEF332276AE7E00862CDB /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		C9DEEF352276AE7E00862CDB /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		C9DEEF362276AE7E00862CDB /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		C9DEEF392276AE7E00862CDB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C9DEEF3C2276AE7E00862CDB /* PushDemo.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PushDemo.xcdatamodel; sourceTree = "<group>"; };
 		C9DEEF3E2276AE8000862CDB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C9DEEF412276AE8000862CDB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -103,11 +119,16 @@
 		C9DEEF312276AE7E00862CDB /* PushDemo */ = {
 			isa = PBXGroup;
 			children = (
+				C91797372278262B00A042EE /* PushDemo.entitlements */,
 				C9DEEF322276AE7E00862CDB /* AppDelegate.h */,
 				C9DEEF332276AE7E00862CDB /* AppDelegate.m */,
 				C9DEEF352276AE7E00862CDB /* ViewController.h */,
 				C9DEEF362276AE7E00862CDB /* ViewController.m */,
-				C9DEEF382276AE7E00862CDB /* Main.storyboard */,
+				C91797322278014700A042EE /* LocalNotificationViewController.h */,
+				C91797332278014700A042EE /* LocalNotificationViewController.m */,
+				C9179738227847BD00A042EE /* sound01.wav */,
+				C9179739227847BD00A042EE /* sound02.wav */,
+				C90A1F1022844FC000941E01 /* jjy2.jpg */,
 				C9DEEF3E2276AE8000862CDB /* Assets.xcassets */,
 				C9DEEF402276AE8000862CDB /* LaunchScreen.storyboard */,
 				C9DEEF432276AE8000862CDB /* Info.plist */,
@@ -202,6 +223,14 @@
 				TargetAttributes = {
 					C9DEEF2E2276AE7E00862CDB = {
 						CreatedOnToolsVersion = 10.1;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 					C9DEEF492276AE8000862CDB = {
 						CreatedOnToolsVersion = 10.1;
@@ -239,8 +268,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				C9DEEF422276AE8000862CDB /* LaunchScreen.storyboard in Resources */,
+				C90A1F1122844FC000941E01 /* jjy2.jpg in Resources */,
 				C9DEEF3F2276AE8000862CDB /* Assets.xcassets in Resources */,
-				C9DEEF3A2276AE7E00862CDB /* Main.storyboard in Resources */,
+				C917973D227847BD00A042EE /* sound02.wav in Resources */,
+				C917973A227847BD00A042EE /* sound01.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -248,6 +279,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C917973E227847BD00A042EE /* sound02.wav in Resources */,
+				C90A1F1222844FC000941E01 /* jjy2.jpg in Resources */,
+				C917973B227847BD00A042EE /* sound01.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -255,6 +289,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C917973F227847BD00A042EE /* sound02.wav in Resources */,
+				C90A1F1322844FC000941E01 /* jjy2.jpg in Resources */,
+				C917973C227847BD00A042EE /* sound01.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -267,6 +304,7 @@
 			files = (
 				C9DEEF372276AE7E00862CDB /* ViewController.m in Sources */,
 				C9DEEF3D2276AE7E00862CDB /* PushDemo.xcdatamodeld in Sources */,
+				C91797342278014700A042EE /* LocalNotificationViewController.m in Sources */,
 				C9DEEF452276AE8000862CDB /* main.m in Sources */,
 				C9DEEF342276AE7E00862CDB /* AppDelegate.m in Sources */,
 			);
@@ -277,6 +315,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C9DEEF4F2276AE8000862CDB /* PushDemoTests.m in Sources */,
+				C91797352278014700A042EE /* LocalNotificationViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -285,6 +324,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C9DEEF5A2276AE8000862CDB /* PushDemoUITests.m in Sources */,
+				C91797362278014700A042EE /* LocalNotificationViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -304,14 +344,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		C9DEEF382276AE7E00862CDB /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				C9DEEF392276AE7E00862CDB /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		C9DEEF402276AE8000862CDB /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -439,15 +471,19 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 9667A46C8L;
+				CODE_SIGN_ENTITLEMENTS = PushDemo/PushDemo.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer: 永超 李 (6L4556Q7ET)";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = LW5266U92D;
 				INFOPLIST_FILE = PushDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = howhyone.PushDemo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mob.MobPush;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = MobPushDev;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -456,15 +492,19 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 9667A46C8L;
+				CODE_SIGN_ENTITLEMENTS = PushDemo/PushDemo.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Guangzhou ZhangTao Network Technology Co., Ltd.";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = LW5266U92D;
 				INFOPLIST_FILE = PushDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = howhyone.PushDemo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mob.MobPush;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = MobPushInHouse;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

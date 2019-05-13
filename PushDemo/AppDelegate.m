@@ -7,8 +7,10 @@
 //
 
 #import "AppDelegate.h"
+#import "ViewController.h"
+#import <UserNotifications/UserNotifications.h>
 
-@interface AppDelegate ()
+@interface AppDelegate ()<UNUserNotificationCenterDelegate>
 
 @end
 
@@ -17,7 +19,64 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    ViewController *viewController = [[ViewController alloc] init];
+     self.window.rootViewController = [[UINavigationController alloc]initWithRootViewController:viewController];
+    [self.window makeKeyAndVisible];
+    [self registerAPNs:application];
     return YES;
+}
+-(void)registerAPNs:(UIApplication *)application
+{
+//    iOS8~iOS10 与 iOS10之后的系统本地推送是不同的
+    if (@available(iOS 10.0, *)) {
+        UNUserNotificationCenter *unCenter = [UNUserNotificationCenter currentNotificationCenter];
+        unCenter.delegate = self;
+        [unCenter requestAuthorizationWithOptions:(UNAuthorizationOptionAlert | UNAuthorizationOptionBadge | UNAuthorizationOptionSound) completionHandler:^(BOOL granted, NSError * _Nullable error) {
+            if (!error) {
+                NSLog(@"注册成功");
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [[UIApplication sharedApplication] registerForRemoteNotifications];
+                });
+            }
+        }];
+        [unCenter getNotificationSettingsWithCompletionHandler:^(UNNotificationSettings * _Nonnull settings) {
+            NSLog(@"regist success settting is  =====+%@",settings);
+        }];
+    } else {
+        if ([application respondsToSelector:@selector(registerUserNotificationSettings:)]) {
+            UIUserNotificationSettings *setttings = [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge) categories:nil];
+            [application registerUserNotificationSettings:setttings];
+            [application registerForRemoteNotifications];
+        }
+    }
+    
+}
+
+#pragma mark -- ios10 推送代理
+//不实现通知不会有提示
+- (void)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions))completionHandler
+API_AVAILABLE(ios(10.0)) API_AVAILABLE(ios(10.0)) API_AVAILABLE(ios(10.0)){
+    
+    completionHandler(UNNotificationPresentationOptionBadge | UNNotificationPresentationOptionSound | UNNotificationPresentationOptionAlert);
+}
+
+//对通知响应
+-(void)userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)(void))completionHandler
+API_AVAILABLE(ios(10.0)) API_AVAILABLE(ios(10.0)){
+    if ([response.notification.request.content.categoryIdentifier isEqualToString:@"request1"]) {
+        [self handleResponse:response];
+    }
+    completionHandler();
+}
+
+-(void)handleResponse:(UNNotificationResponse *)response
+API_AVAILABLE(ios(10.0)){
+    NSString *actionIndentifier = response.actionIdentifier;
+    [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
+    NSLog(@"%@",@"处理通知");
 }
 
 
@@ -49,12 +108,16 @@
     [self saveContext];
 }
 
+-(void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
+{
+    NSLog(@"didReceiveRemoteNotification=======------=======------");
+}
 
 #pragma mark - Core Data stack
 
 @synthesize persistentContainer = _persistentContainer;
 
-- (NSPersistentContainer *)persistentContainer {
+- (NSPersistentContainer *)persistentContainer  API_AVAILABLE(ios(10.0)){
     // The persistent container for the application. This implementation creates and returns a container, having loaded the store for the application to it.
     @synchronized (self) {
         if (_persistentContainer == nil) {
