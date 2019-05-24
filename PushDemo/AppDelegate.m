@@ -36,7 +36,7 @@
         [unCenter requestAuthorizationWithOptions:(UNAuthorizationOptionAlert | UNAuthorizationOptionBadge | UNAuthorizationOptionSound) completionHandler:^(BOOL granted, NSError * _Nullable error) {
             if (!error) {
                 NSLog(@"注册成功");
-                
+
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [[UIApplication sharedApplication] registerForRemoteNotifications];
                 });
@@ -55,30 +55,53 @@
     
 }
 
+
+
 #pragma mark -- ios10 推送代理
-//不实现通知不会有提示
+//不实现通知不会有提示，收到通知的回调
 - (void)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions))completionHandler
 API_AVAILABLE(ios(10.0)) API_AVAILABLE(ios(10.0)) API_AVAILABLE(ios(10.0)){
     
     completionHandler(UNNotificationPresentationOptionBadge | UNNotificationPresentationOptionSound | UNNotificationPresentationOptionAlert);
 }
 
-//对通知响应
+//点击通知 进入APP的回调对通知响应
 -(void)userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void (^)(void))completionHandler
 API_AVAILABLE(ios(10.0)) API_AVAILABLE(ios(10.0)){
-    if ([response.notification.request.content.categoryIdentifier isEqualToString:@"request1"]) {
+    NSString *categoryIdentifier = response.notification.request.content.categoryIdentifier;
+    if ([categoryIdentifier isEqualToString:@"categoryIdentifier"]) {
         [self handleResponse:response];
+        
+        
     }
     completionHandler();
 }
 
+#pragma mark ---------------处理点击通知进入APP后的事件
 -(void)handleResponse:(UNNotificationResponse *)response
 API_AVAILABLE(ios(10.0)){
-    NSString *actionIndentifier = response.actionIdentifier;
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
+    if ([response.actionIdentifier isEqualToString:@"commitActionTitle"])
+    {
+        NSLog(@"commit Action =====");
+    }else if ([response.actionIdentifier isEqualToString:@"textAction1"]){
+        UNTextInputNotificationResponse *textResponse = (UNTextInputNotificationResponse *)response;
+        NSString *userText = textResponse.userText;
+        NSLog(@"input text is ======%@",userText);
+    }else if ([response.actionIdentifier isEqualToString:@"cancelActionTitle"]){
+        NSLog(@"cancel Action -------");
+    }
+        
     NSLog(@"%@",@"处理通知");
 }
 
+#pragma mark ------- ios8 ~ ios10 程序运行时收到通知
+- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification
+{
+//    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"local noti" message:notification.alertBody delegate:nil cancelButtonTitle:@"cancel" otherButtonTitles: nil];
+//    [alert show];
+    application.applicationIconBadgeNumber -= 1;
+}
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

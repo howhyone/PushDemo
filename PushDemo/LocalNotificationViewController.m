@@ -21,6 +21,11 @@
     [self.view setBackgroundColor:[UIColor whiteColor]];
     self.navigationItem.title = @"本地推送";
     [self setLocalNotification];
+    UIButton *cancelBtn = [UIButton buttonWithType:UIButtonTypeSystem];
+    [cancelBtn setTitle:@"取消推送" forState:UIControlStateNormal];
+    [cancelBtn addTarget:self action:@selector(cancelLocalNotifications) forControlEvents:UIControlEventTouchUpInside];
+    [cancelBtn setFrame:CGRectMake(100, 200, 80, 80)];
+    [self.view addSubview:cancelBtn];
 }
 
 #pragma mark ----------- 配置本地推送
@@ -35,9 +40,10 @@
     NSString *subTitle = @"通知-subTitle";
     NSString *body = @"通知-body";
     NSInteger badge = 1;
-    NSInteger timeIntevel = 5;
+    NSInteger timeIntevel = 60;
     NSDictionary *userInfo = @{@"id":@"LOCAL_NOTIFY_SCHEDULE_ID"};
     if (@available(iOS 10.0, *)) {
+        UNUserNotificationCenter *NotifCenter = [UNUserNotificationCenter currentNotificationCenter];
         UNMutableNotificationContent *notificationContent = [[UNMutableNotificationContent alloc] init];
         notificationContent.sound = [UNNotificationSound defaultSound];
         notificationContent.title = title;
@@ -46,35 +52,43 @@
         notificationContent.badge = @(badge);
         notificationContent.userInfo = userInfo;
         NSError *error = nil;
-        NSString *path = [[NSBundle mainBundle] pathForResource:@"sound01" ofType:@"wav"];
+        NSString *path = [[NSBundle mainBundle] pathForResource:@"jjy2" ofType:@"jpg"];
+        
 //        设置通知附件内容
         UNNotificationAttachment *att = [UNNotificationAttachment attachmentWithIdentifier:@"att1" URL:[NSURL fileURLWithPath:path] options:nil error:&error];
         notificationContent.attachments = @[att];
         notificationContent.launchImageName = @"jjy1.png";
 //        设置声音
-        UNNotificationSound *sound = [UNNotificationSound soundNamed:@"sound01"];
+        UNNotificationSound *sound = [UNNotificationSound soundNamed:@"sound02.wav"]; //要有后缀
         notificationContent.sound = sound;
-//        标识符
-        notificationContent.categoryIdentifier = @"categoryIndentifier";
-//          设置触发模式
-        UNTimeIntervalNotificationTrigger *timeIntervalTrigger = [UNTimeIntervalNotificationTrigger triggerWithTimeInterval:timeIntevel repeats:NO];
+        
+//        标识符   推送用户的交互 左拉，点击管理按钮 会出现category 按钮
+        notificationContent.categoryIdentifier = @"categoryIdentifier";
+        
+        UNTextInputNotificationAction *textAction = [UNTextInputNotificationAction actionWithIdentifier:@"textAction1" title:@"textActionTitle1" options:UNNotificationActionOptionForeground textInputButtonTitle:@"textInpuButtonTitle1" textInputPlaceholder:@"textInputPlaceholder1"];
+        UNNotificationAction *commitAction = [UNNotificationAction actionWithIdentifier:@"commitAction" title:@"commitActionTitle" options:UNNotificationActionOptionForeground];
+        UNNotificationAction *cancelAction = [UNNotificationAction actionWithIdentifier:@"cancelAction" title:@"cancelActionTitle" options:UNNotificationActionOptionForeground];
+        UNNotificationCategory *notifCategory = [UNNotificationCategory categoryWithIdentifier:@"categoryIdentifier" actions:@[textAction,commitAction,cancelAction] intentIdentifiers:@[] options:UNNotificationCategoryOptionCustomDismissAction];
+        NSSet *categorySet = [[NSSet alloc] initWithObjects:notifCategory, nil];
+        [NotifCenter setNotificationCategories:categorySet];
+
+
+//        设置触发模式
+        UNTimeIntervalNotificationTrigger *timeIntervalTrigger = [UNTimeIntervalNotificationTrigger triggerWithTimeInterval:timeIntevel repeats:YES];
 //        设置UNNotificationRequest
         UNNotificationRequest *request = [UNNotificationRequest requestWithIdentifier:@"request1" content:notificationContent trigger:timeIntervalTrigger];
 //        把通知加到UNUserNotificationCenter 到指定触发点会被触发
-        [[UNUserNotificationCenter currentNotificationCenter] addNotificationRequest:request withCompletionHandler:^(NSError * _Nullable error) {
+        [NotifCenter addNotificationRequest:request withCompletionHandler:^(NSError * _Nullable error) {
             if (!error) {
-                NSLog(@"addNotificationRequest failed :error is  %@",error);
+                NSLog(@"addNotificationRequest success :error is  %@",error);
             }
             else{
-                NSLog(@"addNotificationRequest success");
+                NSLog(@"addNotificationRequest failed");
             }
-            
         }];
-        
         if (error) {
             NSLog(@"attachment error %@",error);
         }
-        
     } else {
 //        iOS10之前的系统 APP处于后台才会有提示，但是会收到推送
         UILocalNotification *localNotification = [[UILocalNotification alloc] init];
@@ -84,8 +98,9 @@
 //        锁屏状态下显示的文字
          localNotification.alertAction = @"锁屏状态下";
         localNotification.timeZone = [NSTimeZone defaultTimeZone];
-        localNotification.fireDate = [NSDate dateWithTimeIntervalSinceNow:3];
+        localNotification.fireDate = [NSDate dateWithTimeIntervalSinceNow:1];
         localNotification.repeatInterval = NSCalendarUnitMinute;
+        
         localNotification.soundName = @"sound01.wav";//UILocalNotificationDefaultSoundName;
         localNotification.userInfo = @{@"keyInfo":@"valueInfo",
                                        @"id"     :@"LOCAL_NOTIFY_SCHEDULE_ID"};
@@ -93,7 +108,6 @@
 
         [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
     }
-    NSLog(@"notificationArr is  ======+%@",notificatinArr);
 }
 
 -(NSString *)setLowVersionLocalNotification:(NSString *)param
@@ -112,6 +126,9 @@
     for (UILocalNotification *localNotify in notificationArr) {
         if ([[localNotify.userInfo valueForKey:@"id"] isEqualToString:@"LOCAL_NOTIFY_SCHEDULE_ID"]) {
             if (@available(iOS 10.0, *)) {
+//                 移除已展示过的通知
+                [[UNUserNotificationCenter currentNotificationCenter] removeDeliveredNotificationsWithIdentifiers:@[@"request1"]];
+//                 取消还未发送的通知
                 [[UNUserNotificationCenter currentNotificationCenter] removePendingNotificationRequestsWithIdentifiers:@[@"request1"]];
             } else {
                 [[UIApplication sharedApplication] cancelLocalNotification:localNotify];
